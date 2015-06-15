@@ -1,0 +1,22 @@
+Foo\OutcomeType:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+  fields:
+    name:
+      type: string
+      unique: true
+      length: 30
+      nullable: false
+  manyToOne:
+    category:
+      targetEntity: Foo\OutcomeTypeCategory
+      joinColumns:
+        category_id:
+          referencedColumnName: id
+          nullable: false

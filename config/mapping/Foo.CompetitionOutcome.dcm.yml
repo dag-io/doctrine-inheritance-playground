@@ -1,0 +1,9 @@
+Foo\CompetitionOutcome:
+  type: entity
+  manyToOne:
+    competition:
+      targetEntity: Foo\Competition
+      joinColumns:
+        competition_id:
+          referencedColumnName: id
+          nullable: false

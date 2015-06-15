@@ -1,0 +1,35 @@
+Foo\Outcome:
+  type: entity
+  inheritanceType: SINGLE_TABLE
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+  fields:
+    status:
+      type: string
+      length: 30
+      nullable: false
+    createdAt:
+      type: datetime
+      nullable: false
+    updatedAt:
+      type: datetime
+      nullable: false
+  manyToOne:
+    type:
+      targetEntity: Foo\OutcomeType
+      joinColumns:
+        type_id:
+          referencedColumnName: id
+          nullable: false
+  discriminatorColumn:
+    name: type_id
+    type: integer
+  discriminatorMap:
+    3: Foo\CompetitionOutcome
+    2: Foo\ThreeWayMatchOutcome
+    1: Foo\OverUnderMatchOutcome
