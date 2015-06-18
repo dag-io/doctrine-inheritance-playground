@@ -1,6 +1,7 @@
 Foo\Outcome:
   type: entity
   inheritanceType: JOINED
+  repositoryClass: Foo\Repository\OutcomeRepository
   id:
     id:
       type: integer

@@ -8,6 +8,9 @@
       <field name="createdAt" type="datetime" required="true" uuid="e9af6e2c-998d-4baf-946a-00017b04a203"/>
       <field name="updatedAt" type="datetime" required="true" uuid="ddac5a97-540f-4f0f-bc73-9b6bad916079"/>
       <inheritance-parent discriminator-field="type_id" type="JOINED" uuid="3c9a5a85-29de-47f3-8757-c92679ebcbdd"/>
+      <orm-attributes>
+        <attribute name="repository-class">Foo\Repository\OutcomeRepository</attribute>
+      </orm-attributes>
     </entity>
     <entity name="\Foo\CompetitionOutcome" local-name="CompetitionOutcome" namespace="\Foo" uuid="db7d67d0-2397-4de3-a3d7-0f77633a986a">
       <field name="competition_id" type="integer" required="true" unsigned="true" uuid="07cfc27b-7340-45a0-8761-c10284841d37"/>
@@ -64,7 +67,7 @@
     <entity uuid="db7d67d0-2397-4de3-a3d7-0f77633a986a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="3" position-y="260" size-x="0" size-x2="118" size-y="0" size-y2="31"/>
     <inheritance-child uuid="5697e6ba-c25b-41f8-9ba4-affd869302b0" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="70dd41ce-adc1-41a4-a4d9-c0661f7b7b0c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
-    <inheritance-child uuid="d8fadce2-5a32-49e0-89a3-5c14854e2f4e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <inheritance-child uuid="d8fadce2-5a32-49e0-89a3-5c14854e2f4e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-2" color="#969696"/>
     <module uuid="61934a23-bbee-4b01-8d38-5acee136f5a7" bg-color="#FDEBEF" position-x="37" position-y="46" size-x="11" size-x2="817" size-y="22" size-y2="439"/>
     <project uuid="2962f574-a77b-4e9c-8ac5-5f72cbef6ab1" size-x="0" size-x2="878" size-y="0" size-y2="520"/>
   </visual-data>
