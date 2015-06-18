@@ -1,0 +1,8 @@
+Foo\MatchOutcome:
+  type: mappedSuperclass
+  manyToOne:
+    match:
+      targetEntity: Foo\Match
+      joinColumns:
+        match_id:
+          referencedColumnName: id

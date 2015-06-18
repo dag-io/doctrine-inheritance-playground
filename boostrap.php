@@ -13,18 +13,18 @@ $config = Setup::createYAMLMetadataConfiguration(
 );
 
 // Mysql
-//$connectionParams = [
-//    'dbname' => 'doctrine_playground',
-//    'user' => 'root',
-//    'password' => '',
-//    'host' => 'localhost',
-//    'driver' => 'pdo_mysql',
-//];
+$connectionParams = [
+    'dbname' => 'doctrine_playground',
+    'user' => 'root',
+    'password' => '',
+    'host' => 'localhost',
+    'driver' => 'pdo_mysql',
+];
 
 // sqlite
-$connectionParams = [
-    'url' => 'sqlite://var/db.sqlite',
-];
+//$connectionParams = [
+//    'url' => 'sqlite://var/db.sqlite',
+//];
 
 $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 

@@ -1,5 +1,6 @@
 Foo\Match:
   type: entity
+  table: `Match`
   id:
     id:
       type: integer

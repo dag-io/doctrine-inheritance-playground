@@ -1,12 +1,6 @@
 Foo\ThreeWayMatchOutcome:
   type: entity
   manyToOne:
-    match:
-      targetEntity: Foo\Match
-      joinColumns:
-        match_id:
-          referencedColumnName: id
-          nullable: false
     winner:
       targetEntity: Foo\Team
       joinColumns:

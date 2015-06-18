@@ -6,10 +6,3 @@ Foo\OverUnderMatchOutcome:
       nullable: false
       options:
         unsigned: true
-  manyToOne:
-    match:
-      targetEntity: Foo\Match
-      joinColumns:
-        match_id:
-          referencedColumnName: id
-          nullable: false

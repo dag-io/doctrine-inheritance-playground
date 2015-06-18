@@ -3,7 +3,16 @@
 require __DIR__ . '/boostrap.php';
 
 
-$competition = new \Foo\Competition();
-$entityManager->persist($competition);
+$match = new \Foo\Match();
+$match->setName('Barca - Madrid');
+$entityManager->persist($match);
+
+$overUnderMatchOutcome = new \Foo\OverUnderMatchOutcome();
+$overUnderMatchOutcome->setGoalsTotal(2.5);
+$overUnderMatchOutcome->setMatch($match);
+$overUnderMatchOutcome->setStatus('success');
+$overUnderMatchOutcome->setCreatedAt(new DateTime());
+$overUnderMatchOutcome->setUpdatedAt(new DateTime());
+$entityManager->persist($overUnderMatchOutcome);
 
 $entityManager->flush();
