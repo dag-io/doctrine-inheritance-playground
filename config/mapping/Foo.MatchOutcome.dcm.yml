@@ -1,8 +1,43 @@
 Foo\MatchOutcome:
-  type: mappedSuperclass
+  type: entity
+  inheritanceType: SINGLE_TABLE
+  table: outcome
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+  fields:
+    subType:
+      type: integer
+      nullable: false
+      options:
+        unsigned: true
+    status:
+      type: string
+      length: 10
+      nullable: true
+    createdAt:
+      type: datetime
+      nullable: true
+    updatedAt:
+      type: datetime
+      nullable: true
   manyToOne:
     match:
       targetEntity: Foo\Match
       joinColumns:
-        match_id:
+        entityId:
           referencedColumnName: id
+          nullable: false
+  discriminatorColumn:
+    name: type
+    type: integer
+  discriminatorMap:
+    1: Foo\ThreeWayMatchOutcome
+    2: Foo\OverUnderMatchOutcome
+    3: Foo\TwoWayMatchOutcome
+    4: Foo\OddEvenMatchOutcome
+    5: Foo\CorrectScoreMatchOutcome

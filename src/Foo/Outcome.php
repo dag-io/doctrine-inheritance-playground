@@ -3,11 +3,19 @@ namespace Foo;
 
 abstract class Outcome
 {
+    const SUB_TYPE_WIN = 1;
+    const SUB_TYPE_DRAW = 2;
+    const SUB_TYPE_ODD = 3;
+    const SUB_TYPE_EVEN = 4;
+    const SUB_TYPE_OVER = 5;
+    const SUB_TYPE_UNDER = 6;
+    const SUB_TYPE_SCORE = 7;
+
     protected $id;
     protected $status;
     protected $createdAt;
     protected $updatedAt;
-    protected $type;
+    protected $subType;
 
     /**
      * @return mixed
@@ -78,21 +86,21 @@ abstract class Outcome
     }
 
     /**
-     * @return OutcomeType
+     * @return mixed
      */
-    public function getType()
+    public function getSubType()
     {
-        return $this->type;
+        return $this->subType;
     }
 
     /**
-     * @param OutcomeType $type
+     * @param mixed $subType
      *
      * @return $this
      */
-    public function setType(OutcomeType $type)
+    public function setSubType($subType)
     {
-        $this->type = $type;
+        $this->subType = $subType;
 
         return $this;
     }

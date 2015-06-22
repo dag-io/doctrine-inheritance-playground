@@ -4,5 +4,5 @@ Foo\ThreeWayMatchOutcome:
     winner:
       targetEntity: Foo\Team
       joinColumns:
-        winner_id:
+        iparam:
           referencedColumnName: id

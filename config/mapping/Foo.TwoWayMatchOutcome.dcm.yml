@@ -1,9 +1,9 @@
-Foo\CompetitionOutcome:
+Foo\TwoWayMatchOutcome:
   type: entity
   manyToOne:
-    competition:
-      targetEntity: Foo\Competition
+    winner:
+      targetEntity: Foo\Team
       joinColumns:
-        competition_id:
+        iparam:
           referencedColumnName: id
           nullable: false

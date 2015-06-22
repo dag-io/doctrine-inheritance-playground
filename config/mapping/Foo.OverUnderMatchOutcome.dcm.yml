@@ -4,5 +4,6 @@ Foo\OverUnderMatchOutcome:
     goalsTotal:
       type: float
       nullable: false
+      column: dparam
       options:
         unsigned: true

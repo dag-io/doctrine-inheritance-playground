@@ -1,0 +1,24 @@
+Foo\CorrectScoreMatchOutcome:
+  type: entity
+  fields:
+    homeTeamResult:
+      type: float
+      nullable: true
+      column: dparam
+    awayTeamResult:
+      type: float
+      nullable: true
+      column: dparam2
+  manyToOne:
+    homeTeam:
+      targetEntity: Foo\Team
+      joinColumns:
+        iparam:
+          referencedColumnName: id
+          nullable: false
+    awayTeam:
+      targetEntity: Foo\Team
+      joinColumns:
+        iparam2:
+          referencedColumnName: id
+          nullable: false

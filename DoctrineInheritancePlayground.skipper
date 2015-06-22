@@ -1,35 +1,17 @@
 <?xml version="1.0"?>
 <skipper version="3.2.2.1235" mvc="Without MVC" orm="Doctrine2" name="Doctrine-inheritance-playground" uuid="2962f574-a77b-4e9c-8ac5-5f72cbef6ab1">
   <module name="\MainBundle" local-name="MainBundle" namespace="\Foo" local-namespace="Foo" export-format="Doctrine2Yml" export-path="config/mapping" uuid="61934a23-bbee-4b01-8d38-5acee136f5a7">
-    <entity name="\Foo\Outcome" local-name="Outcome" namespace="\Foo" uuid="7a2e14ca-512c-4343-a7e5-979020ae7821">
-      <field name="id" type="integer" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="2258a54e-7caf-4183-9051-c2afe01ca835"/>
-      <field name="type_id" type="integer" required="true" unsigned="true" uuid="4cadd28a-a2de-4af6-9f6d-e6596e0f2a24"/>
-      <field name="status" type="string" size="30" required="true" uuid="6693346f-b84b-4cdc-a592-da16e17e2fdf"/>
-      <field name="createdAt" type="datetime" required="true" uuid="e9af6e2c-998d-4baf-946a-00017b04a203"/>
-      <field name="updatedAt" type="datetime" required="true" uuid="ddac5a97-540f-4f0f-bc73-9b6bad916079"/>
-      <inheritance-parent discriminator-field="type_id" type="JOINED" uuid="3c9a5a85-29de-47f3-8757-c92679ebcbdd"/>
-      <orm-attributes>
-        <attribute name="repository-class">Foo\Repository\OutcomeRepository</attribute>
-      </orm-attributes>
-    </entity>
-    <entity name="\Foo\CompetitionOutcome" local-name="CompetitionOutcome" namespace="\Foo" uuid="db7d67d0-2397-4de3-a3d7-0f77633a986a">
-      <field name="competition_id" type="integer" required="true" unsigned="true" uuid="07cfc27b-7340-45a0-8761-c10284841d37"/>
-      <inheritance-child derived-from="\Foo\Outcome" discriminator-value="3" uuid="5697e6ba-c25b-41f8-9ba4-affd869302b0"/>
-    </entity>
-    <association from="\Foo\CompetitionOutcome" to="\Foo\Competition" inverse-alias="competition" many-owner="true" many-inverse="false" parent-required="true" uuid="fda678f6-d3e9-432f-b5ea-a8a9c0689361">
-      <association-field from="competition_id" to="id"/>
-    </association>
     <entity name="\Foo\ThreeWayMatchOutcome" local-name="ThreeWayMatchOutcome" namespace="\Foo" uuid="6012ad4a-f23b-40a3-af1f-4815ebad98da">
-      <field name="winner_id" type="integer" unsigned="true" uuid="9f42be46-7c4b-4552-bdf3-b59cf78e46e2"/>
-      <inheritance-child derived-from="\Foo\MatchOutcome" uuid="70dd41ce-adc1-41a4-a4d9-c0661f7b7b0c"/>
+      <field name="winner_id" type="integer" enum-values="" unsigned="true" uuid="9f42be46-7c4b-4552-bdf3-b59cf78e46e2">
+        <orm-attributes>
+          <attribute name="column">iparam</attribute>
+        </orm-attributes>
+      </field>
+      <inheritance-child derived-from="\Foo\MatchOutcome" discriminator-value="1" uuid="70dd41ce-adc1-41a4-a4d9-c0661f7b7b0c"/>
     </entity>
     <association from="\Foo\ThreeWayMatchOutcome" to="\Foo\Team" inverse-alias="winner" many-owner="true" many-inverse="false" uuid="c6c909ad-cbf0-4403-90cf-07bba7069588">
       <association-field from="winner_id" to="id"/>
     </association>
-    <entity name="\Foo\Competition" local-name="Competition" namespace="\Foo" uuid="6cc4b947-b77c-44da-89e9-d6ed75084f37">
-      <field name="id" type="integer" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="5fae7361-bda2-4712-bc1f-9dfc3293ba70"/>
-      <field name="name" type="string" size="255" required="true" uuid="0f70a122-982b-432c-b8c3-e2ad54167f80"/>
-    </entity>
     <entity name="\Foo\Match" local-name="Match" namespace="\Foo" uuid="a65bb24c-805c-4667-8fae-9d62c5a53689">
       <field name="id" type="integer" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="4e9e888c-2ecb-4a96-896e-93858ea86fda"/>
       <field name="name" type="string" size="255" required="true" uuid="32fe0e83-2a5a-476d-bd32-9d72a6f9fc54"/>
@@ -38,35 +20,95 @@
       </orm-attributes>
     </entity>
     <entity name="\Foo\OverUnderMatchOutcome" local-name="OverUnderMatchOutcome" namespace="\Foo" uuid="2f859396-e53a-4ef3-b65a-91f78211bed7">
-      <field name="goalsTotal" type="float" required="true" unsigned="true" uuid="ea499f52-2dc1-4f8b-bd76-ad5b36459b26"/>
-      <inheritance-child derived-from="\Foo\MatchOutcome" uuid="d8fadce2-5a32-49e0-89a3-5c14854e2f4e"/>
+      <field name="goalsTotal" type="float" required="true" unsigned="true" uuid="ea499f52-2dc1-4f8b-bd76-ad5b36459b26">
+        <orm-attributes>
+          <attribute name="column">dparam</attribute>
+        </orm-attributes>
+      </field>
+      <inheritance-child derived-from="\Foo\MatchOutcome" discriminator-value="2" uuid="d8fadce2-5a32-49e0-89a3-5c14854e2f4e"/>
     </entity>
     <entity name="\Foo\Team" local-name="Team" namespace="\Foo" uuid="611f347d-6398-4d26-9410-021129eb5d36">
       <field name="id" type="integer" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="d43762dc-9246-419a-9c76-23bb1b5cbc72"/>
       <field name="name" type="string" size="255" required="true" uuid="e72bd768-11de-4f43-ba69-fdab219a28df"/>
     </entity>
     <entity name="\Foo\MatchOutcome" local-name="MatchOutcome" namespace="\Foo" uuid="26349ddf-0e93-4524-9ea7-f21d9599b1b6">
-      <field name="match_id" type="integer" unsigned="true" uuid="51716ce0-7170-44b0-9d59-99a65227d752"/>
-      <inheritance-parent type="MAPPED_SUPERCLASS" uuid="a0fffa94-27b4-4e76-82a2-8703b29e83fd"/>
+      <field name="id" type="integer" required="true" primary="true" unsigned="true" auto-increment="true" uuid="62ba2820-97bd-4b53-9191-11b190f3a4ce"/>
+      <field name="entityId" type="integer" required="true" unsigned="true" uuid="51716ce0-7170-44b0-9d59-99a65227d752"/>
+      <field name="type" type="integer" required="true" unsigned="true" uuid="28f43739-4d5a-479f-825d-ab60d7db06d3"/>
+      <field name="subType" type="integer" required="true" unsigned="true" uuid="6c9a1298-470c-406f-923f-c54d1d8b36f0"/>
+      <field name="status" type="string" size="10" uuid="002e7f82-1432-4de0-a91a-42049c72d9a0"/>
+      <field name="createdAt" type="datetime" uuid="cfbb71b0-d773-4a33-abb2-77cc09c80a73"/>
+      <field name="updatedAt" type="datetime" uuid="40f6151f-aae3-4dee-9d8a-f8d8849cc6ca"/>
+      <inheritance-parent discriminator-field="type" type="SINGLE_TABLE" uuid="a0fffa94-27b4-4e76-82a2-8703b29e83fd"/>
+      <orm-attributes>
+        <attribute name="table">outcome</attribute>
+      </orm-attributes>
     </entity>
-    <association from="\Foo\MatchOutcome" to="\Foo\Match" inverse-alias="match" many-owner="true" many-inverse="false" uuid="1319e29d-9312-4fc7-a46c-84a506f18070">
-      <association-field from="match_id" to="id"/>
+    <association from="\Foo\MatchOutcome" to="\Foo\Match" inverse-alias="match" many-owner="true" many-inverse="false" parent-required="true" uuid="1319e29d-9312-4fc7-a46c-84a506f18070">
+      <association-field from="entityId" to="id"/>
+    </association>
+    <entity name="\Foo\TwoWayMatchOutcome" local-name="TwoWayMatchOutcome" namespace="\Foo" uuid="520e6638-3e86-40a8-81f2-2011b85ad643">
+      <field name="winner_id" type="integer" required="true" unsigned="true" uuid="df725cbc-5289-4411-81d0-14f208307003">
+        <orm-attributes>
+          <attribute name="column">iparam</attribute>
+        </orm-attributes>
+      </field>
+      <inheritance-child derived-from="\Foo\MatchOutcome" discriminator-value="3" uuid="aa5b0214-7c89-4baf-a55f-85e2c0273a21"/>
+    </entity>
+    <association from="\Foo\TwoWayMatchOutcome" to="\Foo\Team" inverse-alias="winner" many-owner="true" many-inverse="false" parent-required="true" uuid="15e949c5-ce00-4524-893a-5385e3cca965">
+      <association-field from="winner_id" to="id"/>
+    </association>
+    <entity name="\Foo\OddEvenMatchOutcome" local-name="OddEvenMatchOutcome" namespace="\Foo" uuid="1366d8d9-40ce-4c6e-a821-50aedb09f4f2">
+      <inheritance-child derived-from="\Foo\MatchOutcome" discriminator-value="4" uuid="6cc64bb2-6e9e-4789-94ee-042f1ac4ce07"/>
+    </entity>
+    <entity name="\Foo\CorrectScoreMatchOutcome" local-name="CorrectScoreMatchOutcome" namespace="\Foo" uuid="59f966be-a1ea-45a9-ba4f-413769e02984">
+      <field name="home_team_id" type="integer" required="true" unsigned="true" uuid="157d1ddb-ce52-4d54-8b4d-f4efbd4afb42">
+        <orm-attributes>
+          <attribute name="column">iparam</attribute>
+        </orm-attributes>
+      </field>
+      <field name="away_team_id" type="integer" required="true" unsigned="true" uuid="6932904c-8b5a-471c-84f1-135273aa7e56">
+        <orm-attributes>
+          <attribute name="column">iparam2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="homeTeamResult" type="float" uuid="19a8d4db-c656-4dd1-8e89-d3a1075af880">
+        <orm-attributes>
+          <attribute name="column">dparam</attribute>
+        </orm-attributes>
+      </field>
+      <field name="awayTeamResult" type="float" uuid="bc63ec4e-4b39-4f4e-8553-9f34da5eab69">
+        <orm-attributes>
+          <attribute name="column">dparam2</attribute>
+        </orm-attributes>
+      </field>
+      <inheritance-child derived-from="\Foo\MatchOutcome" discriminator-value="5" uuid="34cd0667-e6b2-459a-ae96-a0787343575a"/>
+    </entity>
+    <association from="\Foo\CorrectScoreMatchOutcome" to="\Foo\Team" inverse-alias="homeTeam" many-owner="true" many-inverse="false" parent-required="true" uuid="a5981e58-8651-49d6-8787-28c648aa3f08">
+      <association-field from="home_team_id" to="id"/>
+    </association>
+    <association from="\Foo\CorrectScoreMatchOutcome" to="\Foo\Team" inverse-alias="awayTeam" many-owner="true" many-inverse="false" parent-required="true" uuid="b34c68b2-26c0-45e9-929d-bb563d984465">
+      <association-field from="away_team_id" to="id"/>
     </association>
   </module>
   <visual-data>
     <association uuid="1319e29d-9312-4fc7-a46c-84a506f18070" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="15e949c5-ce00-4524-893a-5385e3cca965" center-position-x="-3" center-position-y="0" color="#969696"/>
+    <association uuid="a5981e58-8651-49d6-8787-28c648aa3f08" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="b34c68b2-26c0-45e9-929d-bb563d984465" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="c6c909ad-cbf0-4403-90cf-07bba7069588" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
-    <association uuid="fda678f6-d3e9-432f-b5ea-a8a9c0689361" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
-    <entity uuid="26349ddf-0e93-4524-9ea7-f21d9599b1b6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="445" position-y="245" size-x="0" size-x2="96" size-y="0" size-y2="31"/>
-    <entity uuid="2f859396-e53a-4ef3-b65a-91f78211bed7" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="364" position-y="326" size-x="0" size-x2="119" size-y="0" size-y2="31"/>
-    <entity uuid="6012ad4a-f23b-40a3-af1f-4815ebad98da" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="497" position-y="329" size-x="0" size-x2="116" size-y="0" size-y2="31"/>
-    <entity uuid="611f347d-6398-4d26-9410-021129eb5d36" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="709" position-y="207" size-x="0" size-x2="98" size-y="0" size-y2="45"/>
-    <entity uuid="6cc4b947-b77c-44da-89e9-d6ed75084f37" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="6" position-y="382" size-x="0" size-x2="98" size-y="0" size-y2="45"/>
-    <entity uuid="7a2e14ca-512c-4343-a7e5-979020ae7821" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="329" position-y="85" size-x="0" size-x2="108" size-y="0" size-y2="87"/>
-    <entity uuid="a65bb24c-805c-4667-8fae-9d62c5a53689" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="708" position-y="155" size-x="0" size-x2="98" size-y="0" size-y2="45"/>
-    <entity uuid="db7d67d0-2397-4de3-a3d7-0f77633a986a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="3" position-y="260" size-x="0" size-x2="118" size-y="0" size-y2="31"/>
-    <inheritance-child uuid="5697e6ba-c25b-41f8-9ba4-affd869302b0" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <entity uuid="1366d8d9-40ce-4c6e-a821-50aedb09f4f2" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="615" position-y="327" size-x="0" size-x2="115" size-y="0" size-y2="20"/>
+    <entity uuid="26349ddf-0e93-4524-9ea7-f21d9599b1b6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="391" position-y="24" size-x="0" size-x2="108" size-y="0" size-y2="115"/>
+    <entity uuid="2f859396-e53a-4ef3-b65a-91f78211bed7" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="239" position-y="320" size-x="0" size-x2="119" size-y="0" size-y2="31"/>
+    <entity uuid="520e6638-3e86-40a8-81f2-2011b85ad643" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="497" position-y="324" size-x="0" size-x2="108" size-y="0" size-y2="31"/>
+    <entity uuid="59f966be-a1ea-45a9-ba4f-413769e02984" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="97" position-y="321" size-x="0" size-x2="130" size-y="0" size-y2="31"/>
+    <entity uuid="6012ad4a-f23b-40a3-af1f-4815ebad98da" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="371" position-y="322" size-x="0" size-x2="116" size-y="0" size-y2="31"/>
+    <entity uuid="611f347d-6398-4d26-9410-021129eb5d36" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="705" position-y="259" size-x="0" size-x2="98" size-y="0" size-y2="45"/>
+    <entity uuid="a65bb24c-805c-4667-8fae-9d62c5a53689" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="709" position-y="198" size-x="0" size-x2="98" size-y="0" size-y2="45"/>
+    <inheritance-child uuid="34cd0667-e6b2-459a-ae96-a0787343575a" caption1-position-x="0" caption1-position-y="-1" center-position-x="0" center-position-y="0" color="#969696"/>
+    <inheritance-child uuid="6cc64bb2-6e9e-4789-94ee-042f1ac4ce07" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="70dd41ce-adc1-41a4-a4d9-c0661f7b7b0c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <inheritance-child uuid="aa5b0214-7c89-4baf-a55f-85e2c0273a21" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="d8fadce2-5a32-49e0-89a3-5c14854e2f4e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-2" color="#969696"/>
     <module uuid="61934a23-bbee-4b01-8d38-5acee136f5a7" bg-color="#FDEBEF" position-x="37" position-y="46" size-x="11" size-x2="817" size-y="22" size-y2="439"/>
     <project uuid="2962f574-a77b-4e9c-8ac5-5f72cbef6ab1" size-x="0" size-x2="878" size-y="0" size-y2="520"/>
